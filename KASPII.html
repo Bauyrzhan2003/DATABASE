@@ -42,7 +42,7 @@
       padding: 11px;
       border-radius: 7px;
       margin-bottom: 12px;
-      border: solid 1px #88888873;
+      border: solid 1px #88888840;
     }
     .tabs {
       display: flex;
@@ -58,12 +58,13 @@
     }
     input[type="number"], input[type="text"] {
       width: 100%;
-      padding: 10px;
-      font-size: 16px;
+      padding: 16px;
+      font-size: 13px;
       border: 1px solid #eee;
       border-radius: 6px;
       margin-bottom: 0px;
       box-sizing: border-box;
+      background-color: #8888881c;
     }
     .contact-card {
       background: #c5ac74;
@@ -93,6 +94,9 @@
       border-radius: 6px;
       border: 1px solid #ccc;
       box-sizing: border-box;
+    
+      background-color: #8888881c;
+    
     }
     .tags {
       display: flex;
@@ -114,7 +118,7 @@
       text-align: center;
       border-radius: 10px;
       cursor: pointer;
-      margin-top: 20px;
+      margin-top: 130px;
     }
     img{
       height: 30px;
@@ -144,7 +148,7 @@
     </div>
 
     <div class="receiver-input">
-      <input type="text" id="phone" placeholder="+7" maxlength="10" oninput="checkContact()" />
+      <input type="text" id="phone" placeholder="Телефон получателя" maxlength="10" oninput="checkContact()" />
     </div>
 
     <div class="contact-card" id="contactCard" style="display:none">
