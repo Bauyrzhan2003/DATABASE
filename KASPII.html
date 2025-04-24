@@ -147,10 +147,28 @@
       <div style="color:#888">QR</div>
     </div>
 
-    <div class="receiver-input">
-      <input type="text" id="phone" placeholder="Телефон получателя" maxlength="10" oninput="checkContact()" />
-    </div>
-
+    <input type="text" id="phone" placeholder="Телефон получателя" maxlength="12"
+    onfocus="addPrefix()" oninput="enforceFormat(); checkContact()" />
+  
+    
+    <script>
+      function addPrefix() {
+        const phoneInput = document.getElementById("phone");
+        if (!phoneInput.value.startsWith("+7")) {
+          phoneInput.value = "+7";
+        }
+      }
+    
+      function enforceFormat() {
+        const phoneInput = document.getElementById("phone");
+        if (!phoneInput.value.startsWith("+7")) {
+          phoneInput.value = "+7" + phoneInput.value.replace(/[^0-9]/g, "").slice(0, 10);
+        } else {
+          phoneInput.value = "+7" + phoneInput.value.replace(/[^0-9]/g, "").slice(1, 11);
+        }
+      }
+    </script>
+    
     <div class="contact-card" id="contactCard" style="display:none">
       <div class="avatar"></div>
       <div>
@@ -183,7 +201,7 @@
 
     const contacts = {
 
-      '7472827101': 'Жанболат Ұ.'
+      '+77472827101': 'Жанболат Ұ.'
     };
 
     function checkContact() {
