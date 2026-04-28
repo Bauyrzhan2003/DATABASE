@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<title>Зертханалық жұмыс</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 20px;
+}
+
+h1 {
+    color: #38bdf8;
+}
+
+.block {
+    background: #1e293b;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.code {
+    background: #020617;
+    padding: 15px;
+    border-radius: 8px;
+    font-family: monospace;
+    white-space: pre;
+    user-select: none; /* копировать етпейді */
+}
+
+button {
+    padding: 10px 20px;
+    background: #38bdf8;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+</style>
+
+<script>
+// копировать блок
+document.addEventListener('copy', function(e) {
+    e.preventDefault();
+});
+
+// оң жақ кнопканы өшіру
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
+</script>
+
+</head>
+
+<body>
+
+<h1>🔬 Зертханалық жұмыс</h1>
+
+<div class="block">
+<h3>📌 Тапсырма:</h3>
+<p>Берілген кодта қателер бар. Бағдарламаны толық жұмыс істейтін деңгейге жеткізіңіз.</p>
+
+<ul>
+<li>Канкулятор жасау керек main.py қосу арқылы</li>
+<li>Қателерді табу</li>
+<li>Кодты рефакторинг жасау</li>
+</ul>
+</div>
+
+<div class="block">
+<h3><b>📄 main.py</b> </br>Главный py файл осыны қосу арқылы Канкулятор жұмыс жасау керек</h3>
+<div class="code">
+import datetime
+import random
+
+a = input(a: )
+b = input(b: )
+
+print("1 - қосу")
+print("2 - азайту")
+print("3 - көбейту")
+print("4 - бөлу")
+
+choice = input("Таңдау: ")
+
+if choice == "1":
+    print(add(a, b))
+elif choice == "2":
+    print(sub(a, b))
+elif choice == "3":
+    print(multiply(a, b))
+elif choice == "4":
+    print(divide(a, b))
+</div>
+</div>
+
+<div class="block">
+<h3>📄 add_sub.py</h3>
+<div class="code">
+from add_sub import add, sub
+
+def add(a, b):
+    return a + b
+
+def sub(a, b):
+    return a - b
+</div>
+</div>
+
+<div class="block">
+<h3>📄 mul_div.py</h3>
+<div class="code">
+from mul_div import multiply, divide
+
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    return a / b
+</div>
+</div>
+
+<div class="block">
+<h3>❗ Міндет:</h3>
+<ul>
+<li>Бағдарламаны іске қос</li>
+<li>Барлық қателерді тап</li>
+<li>Дұрыс архитектура жаса</li>
+</ul>
+</div>
+
+</body>
+</html>
