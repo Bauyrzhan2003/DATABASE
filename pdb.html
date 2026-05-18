@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<title>PDB Full Guide</title>
+
+<style>
+body{
+    font-family: Arial;
+    margin:0;
+    background:#f4f6f8;
+}
+
+header{
+    background:#1b3c59;
+    color:white;
+    text-align:center;
+    padding:25px;
+}
+
+section{
+    max-width:900px;
+    margin:20px auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 8px gray;
+}
+
+h2{
+    color:#1b3c59;
+}
+
+.code{
+    background:black;
+    color:#00ff00;
+    padding:10px;
+    border-radius:5px;
+    font-family: monospace;
+    margin:10px 0;
+    white-space:pre-wrap;
+}
+
+hr{
+    margin:20px 0;
+}
+
+.note{
+    background:#e8f4ff;
+    padding:10px;
+    border-left:5px solid #3498db;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🐍 Python pdb — Толық түсіндірме</h1>
+<p>Debugger және қателерді табу құралы</p>
+</header>
+
+<!-- 1 -->
+<section>
+<h2>📘 pdb деген не?</h2>
+
+<p>
+pdb — Python Debugger (түзеткіш).
+Ол программадағы қателерді табуға көмектесетін Python-ның ішкі debugger құралы.
+</p>
+
+<p>
+Ол кодты қадам-қадаммен тоқтатып, айнымалылардың мәнін көруге мүмкіндік береді.
+</p>
+</section>
+
+<!-- 2 -->
+<section>
+<h2>❓ Неге керек?</h2>
+
+<p>Мысалы программа дұрыс жұмыс істемей тұр:</p>
+
+<div class="code">
+a = 10
+b = 0
+
+result = a / b
+print(result)
+</div>
+
+<p>
+Мұнда қате шығады:
+</p>
+
+<p><b>ZeroDivisionError</b></p>
+
+<p>
+Осындай кезде pdb арқылы қай жерде қате екенін тексереміз.
+</p>
+</section>
+
+<!-- 3 -->
+<section>
+<h2>⚙️ pdb қолдану</h2>
+
+<p>Ең оңай тәсіл:</p>
+
+<div class="code">
+import pdb
+
+pdb.set_trace()
+</div>
+
+<p>Кодтың ішіне осыны жазамыз.</p>
+</section>
+
+<!-- 4 -->
+<section>
+<h2>🧠 Мысал</h2>
+
+<div class="code">
+import pdb
+
+a = 10
+b = 2
+
+pdb.set_trace()
+
+result = a / b
+print(result)
+</div>
+</section>
+
+<!-- 5 -->
+<section>
+<h2>🔎 Айнымалыны көру</h2>
+
+<div class="code">
+p a
+</div>
+
+<p>Нәтиже:</p>
+<div class="code">
+10
+</div>
+</section>
+
+<!-- 6 -->
+<section>
+<h2>➡️ Келесі жолға өту</h2>
+
+<div class="code">
+n
+</div>
+
+<p>
+(next) → келесі код орындалады
+</p>
+</section>
+
+<!-- 7 -->
+<section>
+<h2>📌 pdb.set_trace() қалай жұмыс істейді?</h2>
+
+<div class="note">
+<p>
+Python дәл сол жерге келгенде программа тоқтайды.
+Сосын сен тексересің.
+</p>
+</div>
+
+<div class="code">
+1-жол ↓ n
+2-жол ↓ n
+3-жол
+</div>
+</section>
+
+<!-- 8 -->
+<section>
+<h2>🧪 Толық көрініс</h2>
+
+<div class="code">
+(Pdb) n
+-> c = a + b
+
+(Pdb) n
+-> print(c)
+
+(Pdb) n
+7
+</div>
+</section>
+
+<!-- 9 -->
+<section>
+<h2>⚙️ Debugger қалай жұмыс істейді?</h2>
+
+<div class="code">
+Код жүріп келеді
+       ↓
+pdb.set_trace()
+       ↓
+Программа тоқтайды
+       ↓
+Сен тексересің
+       ↓
+n / c / p қолданасың
+</div>
+</section>
+
+<!-- 10 -->
+<section>
+<h2>🔥 Ең көп қолданылатын командалар</h2>
+
+<div class="code">
+p a  → a мәнін көру
+n    → келесі жол
+c    → жалғастыру
+q    → шығу
+l    → кодты көру
+</div>
+</section>
+
+<!-- 11 -->
+<section>
+<h2>💥 Қандай қателерді табады?</h2>
+
+<ul>
+<li>ZeroDivisionError</li>
+<li>IndexError</li>
+<li>TypeError</li>
+<li>NameError</li>
+<li>Логикалық қателер</li>
+</ul>
+</section>
+
+<!-- 12 -->
+<section>
+<h2>📋 Мысал (locals)</h2>
+
+<div class="code">
+import pdb
+
+a = 10
+b = 20
+name = "Ali"
+
+pdb.set_trace()
+</div>
+
+<div class="code">
+p locals()
+</div>
+
+<p>Нәтиже:</p>
+
+<div class="code">
+{'a': 10, 'b': 20, 'name': 'Ali'}
+</div>
+</section>
+
+<!-- 13 -->
+<section>
+<h2>📖 l — кодты көру</h2>
+
+<div class="code">
+l
+</div>
+
+<p>Мысал:</p>
+
+<div class="code">
+7 -> c = a + b
+8    print(c)
+</div>
+</section>
+
+<!-- 14 -->
+<section>
+<h2>🚀 c — жалғастыру</h2>
+
+<div class="code">
+c
+</div>
+
+<p>👉 Программаны тоқтаусыз соңына дейін жүргізеді</p>
+</section>
+
+<!-- 15 -->
+<section>
+<h2>🚪 q — шығу</h2>
+
+<div class="code">
+q
+</div>
+
+<p>👉 Debugger-ден шығу</p>
+</section>
+
+</body>
+</html>
