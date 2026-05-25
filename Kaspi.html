@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kaspi Services Clone</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, sans-serif;
+}
+
+body{
+    background:#ececec;
+    display:flex;
+    justify-content:center;
+    padding:20px;
+}
+
+.phone{
+    width:360px;
+    height:740px;
+    background:white;
+    overflow:hidden;
+    position:relative;
+}
+
+/* HEADER */
+
+.header{
+    padding:14px 16px 10px;
+    border-bottom:1px solid #efefef;
+}
+
+.title{
+    text-align:center;
+    font-size:15px;
+    font-weight:600;
+    color:#333;
+    margin-bottom:18px;
+}
+
+.lang{
+    position:absolute;
+    right:15px;
+    top:10px;
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+.lang span{
+    font-size:14px;
+    color:#666;
+}
+
+.lang .active{
+    border:1px solid #d81f26;
+    color:#d81f26;
+    padding:3px 8px;
+    border-radius:14px;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+}
+
+.avatar{
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    border:1px solid #cfcfcf;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#999;
+    font-size:20px;
+}
+
+.profile-text{
+    margin-left:12px;
+}
+
+.profile-text h3{
+    font-size:18px;
+    font-weight:500;
+    color:#333;
+}
+
+.profile-text p{
+    font-size:13px;
+    color:#999;
+    margin-top:3px;
+}
+
+.red-dot{
+    margin-left:auto;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#d81f26;
+}
+
+.arrow{
+    margin-left:10px;
+    color:#888;
+}
+
+/* SERVICES */
+
+.services{
+    padding:18px 10px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    row-gap:28px;
+}
+
+.service{
+    text-align:center;
+    position:relative;
+}
+
+.service i{
+    font-size:28px;
+    color:#d81f26;
+    margin-bottom:10px;
+}
+
+.service p{
+    font-size:13px;
+    color:#333;
+}
+
+.badge{
+    position:absolute;
+    top:-4px;
+    right:18px;
+    background:#d81f26;
+    color:white;
+    font-size:9px;
+    padding:2px 5px;
+    border-radius:10px;
+}
+
+/* SECTION */
+
+.section{
+    border-top:10px solid #f5f5f5;
+}
+
+.section-title{
+    padding:15px;
+    font-size:18px;
+    font-weight:600;
+    color:#333;
+}
+
+/* PARTNER */
+
+.partner{
+    display:flex;
+    align-items:center;
+    padding:14px 15px;
+    border-top:1px solid #f0f0f0;
+}
+
+.partner-logo{
+    width:42px;
+    height:42px;
+    border-radius:10px;
+    background:#f2f2f2;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.partner-logo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+ 
+.partner-logo img{
+    content:url("1.png");
+}
+
+
+.partner-info{
+    margin-left:12px;
+    flex:1;
+}
+
+.partner-info h4{
+    font-size:16px;
+    color:#333;
+    font-weight:500;
+}
+
+.partner-info p{
+    font-size:12px;
+    color:#888;
+    margin-top:3px;
+}
+
+.green{
+    background:#67b84a;
+    color:white;
+    font-size:10px;
+    padding:2px 5px;
+    border-radius:6px;
+    margin-left:4px;
+}
+
+.partner-arrow{
+    color:#aaa;
+    font-size:18px;
+}
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:68px;
+    border-top:1px solid #e6e6e6;
+    background:white;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+}
+
+.nav-item{
+    text-align:center;
+    color:#888;
+    font-size:11px;
+}
+
+.nav-item i{
+    font-size:21px;
+    margin-bottom:5px;
+}
+
+.nav-item.active{
+    color:#d81f26;
+}
+.icon-img{
+    width:45px;
+    height:45px;
+    object-fit:contain;
+    margin-top: -9px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="phone">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="title">Сервисы</div>
+
+        <div class="lang">
+            <span>Қаз</span>
+            <span class="active">Рус</span>
+            
+        </div>
+<div class="iii" style="height: 1px; background-color: #e7e1e1;"></div></br>
+
+        <div class="profile">
+
+            <div class="avatar">
+                <i class="fa-regular fa-user"></i>
+            </div>
+
+            <div class="profile-text">
+                <h3>Бауыржан У.</h3>
+                <p>Настройки</p>
+            </div>
+
+            <div class="red-dot"></div>
+
+            <div class="arrow">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+
+        </div>
+
+    </div>
+<div class="oneee" style="height: 8px; background-color: #eeecec;"></div>
+    <!-- SERVICES -->
+
+    <div class="services">
+
+        <div class="service">
+             <img src="1.png" class="icon-img"></i>
+            <p>Магазин</p>
+        </div>
+
+        <div class="service">
+            <img src="2.png" class="icon-img"></i>
+            <p>Мой Банк</p>
+        </div>
+
+        <div class="service">
+            <img src="3.png" class="icon-img"></i>
+            <p>Платежи</p>
+        </div>
+
+        <div class="service">
+            <img src="4.png" class="icon-img"></i>
+            <p>Переводы</p>
+        </div>
+
+        <div class="service">
+            <img src="5.png" class="icon-img"></i>
+            <p>Акции</p>
+        </div>
+
+        <div class="service">
+            
+            <img src="6.png" class="icon-img"></i>
+            <p>Travel</p>
+        </div>
+
+        <div class="service">
+            <img src="7.png" class="icon-img"></i>
+            <p>Госуслуги</p>
+        </div>
+
+        <div class="service">
+            <img src="8.png" class="icon-img"></i>
+            <p>Объявления</p>
+        </div>
+
+        <div class="service">
+            <img src="9.png" class="icon-img"></i>
+            <p>Гид</p>
+        </div>
+
+        <div class="service">
+            <img src="10.png" class="icon-img"></i>
+            <p>Kaspi Maps</p>
+        </div>
+
+        <div class="service">
+            <img src="11.png" class="icon-img"></i>
+            <p>Сертификаты</p>
+        </div>
+
+        <div class="service">
+            <img src="12.png" class="icon-img"></i>
+            <p>Работа</p>
+        </div>
+
+        <div class="service">
+            <img src="13.png" class="icon-img"></i>
+            <p>Kaspi Alaqan</p>
+        </div>
+
+    </div>
+
+    <!-- PARTNER -->
+
+    <div class="section">
+
+        <div class="section-title">
+            Партнерские сервисы
+        </div>
+
+        <div class="partner">
+
+            <div class="partner-logo">
+                <img src="m.png">
+            </div>
+
+            <div class="partner-info">
+                <h4>Magnum</h4>
+                <p>Продукты с Бесплатной доставкой</p>
+            </div>
+
+            <div class="partner-arrow">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+
+        </div>
+
+        <div class="partner">
+
+            <div class="partner-logo">
+                <img src="glovo.png">
+            </div>
+
+            <div class="partner-info">
+                <h4>
+                    Glovo
+                    <span class="green">10%</span>
+                </h4>
+
+                <p>Сервис доставки еды</p>
+            </div>
+
+            <div class="partner-arrow">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+
+        </div>
+
+        <div class="partner">
+
+            <div class="partner-logo">
+                <img src="alipay.png">
+            </div>
+
+            <div class="partner-info">
+                <h4>Alipay+</h4>
+                <p>Оплата за границей через QR</p>
+            </div>
+
+            <div class="partner-arrow">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- BOTTOM NAV -->
+
+    <div class="bottom-nav">
+
+        <div class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <div>Главная</div>
+        </div>
+
+        <div class="nav-item">
+            <i class="fa-solid fa-qrcode"></i>
+            <div>Kaspi QR</div>
+        </div>
+
+        <div class="nav-item">
+            <i class="fa-regular fa-comment"></i>
+            <div>Сообщения</div>
+        </div>
+
+        <div class="nav-item active">
+            <i class="fa-solid fa-bars"></i>
+            <div>Сервисы</div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const services = document.querySelectorAll('.service');
+
+services.forEach(service => {
+
+    service.addEventListener('click', () => {
+
+        console.log(service.innerText);
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
