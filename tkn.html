@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<title>Tkinter кітапханасы арқылы графикалық интерфейс құру</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 40px;
+}
+h1,h2,h3{
+    color:#2c3e50;
+}
+table{
+    border-collapse: collapse;
+    width:100%;
+}
+table, th, td{
+    border:1px solid black;
+    padding:8px;
+}
+code{
+    background:#f4f4f4;
+    padding:2px 4px;
+}
+pre{
+    background:#f4f4f4;
+    padding:10px;
+    overflow:auto;
+}
+</style>
+</head>
+<body>
+
+<h1>Тақырып: Tkinter кітапханасы арқылы графикалық интерфейс құру</h1>
+
+<h2>Сабақтың мақсаты</h2>
+<ul>
+<li>Tkinter кітапханасымен танысу;</li>
+<li>Графикалық интерфейс (GUI) құруды үйрену;</li>
+<li>Терезе, батырма, мәтіндік өріс және жазулармен жұмыс жасау;</li>
+<li>Python бағдарламаларын қолданушыға ыңғайлы түрде жасау.</li>
+</ul>
+
+<h2>1. Tkinter дегеніміз не?</h2>
+
+<p>
+<b>Tkinter</b> — Python тіліндегі графикалық интерфейс (GUI - Graphical User Interface)
+жасауға арналған стандартты кітапхана.
+</p>
+
+<p>Бұған дейін біз бағдарламаларды консольде орындадық. Мысалы:</p>
+
+<pre><code>
+name = input("Атыңызды енгізіңіз: ")
+print("Сәлем,", name)
+</code></pre>
+
+<p>Ал Tkinter көмегімен біз терезелер, батырмалар, мәзірлер және енгізу өрістерін жасай аламыз.</p>
+
+<p>Мысалы:</p>
+
+<pre><code>
+import tkinter as tk
+
+window = tk.Tk()
+window.mainloop()
+</code></pre>
+
+<p>Бұл код бос терезе ашады.</p>
+
+<h2>2. Tkinter кітапханасын қосу</h2>
+
+<p>Tkinter кітапханасын импорттау үшін:</p>
+
+<pre><code>
+import tkinter as tk
+</code></pre>
+
+<p>Мұндағы:</p>
+
+<ul>
+<li><b>tk</b> — қысқартылған атау;</li>
+<li><b>tkinter</b> кітапханасының барлық функциялары мен объектілеріне қол жеткізуге мүмкіндік береді.</li>
+</ul>
+
+<h2>3. Терезе құру</h2>
+
+<pre><code>
+import tkinter as tk
+
+window = tk.Tk()
+
+window.title("Менің алғашқы бағдарламам")
+window.geometry("400x300")
+
+window.mainloop()
+</code></pre>
+
+<h3>Түсіндірме</h3>
+
+<table>
+<tr>
+<th>Команда</th>
+<th>Қызметі</th>
+</tr>
+
+<tr>
+<td>Tk()</td>
+<td>Терезе құрады</td>
+</tr>
+
+<tr>
+<td>title()</td>
+<td>Терезе атауын өзгертеді</td>
+</tr>
+
+<tr>
+<td>geometry()</td>
+<td>Өлшемін береді</td>
+</tr>
+
+<tr>
+<td>mainloop()</td>
+<td>Терезені экранда ұстап тұрады</td>
+</tr>
+</table>
+
+<h2>4. Label (Жазу)</h2>
+
+<p>Экранға мәтін шығару үшін қолданылады.</p>
+
+<pre><code>
+import tkinter as tk
+
+window = tk.Tk()
+
+label = tk.Label(window, text="Сәлем, әлем!")
+label.pack()
+
+window.mainloop()
+</code></pre>
+
+<p>Нәтижесінде терезеде:</p>
+
+<pre><code>
+Сәлем, әлем!
+</code></pre>
+
+<p>деген жазу шығады.</p>
+
+<h2>5. Button (Батырма)</h2>
+
+<p>Батырма жасау:</p>
+
+<pre><code>
+import tkinter as tk
+
+window = tk.Tk()
+
+button = tk.Button(window, text="Бас")
+button.pack()
+
+window.mainloop()
+</code></pre>
+
+<h2>6. Батырмаға әрекет қосу</h2>
+
+<pre><code>
+import tkinter as tk
+
+def hello():
+    print("Сәлем!")
+
+window = tk.Tk()
+
+button = tk.Button(window,
+                   text="Бас",
+                   command=hello)
+
+button.pack()
+
+window.mainloop()
+</code></pre>
+
+<p>Батырманы басқанда:</p>
+
+<pre><code>
+Сәлем!
+</code></pre>
+
+<p>деген жазу консольге шығады.</p>
+
+<h2>7. Entry (Енгізу өрісі)</h2>
+
+<p>Пайдаланушыдан мәлімет алу үшін қолданылады.</p>
+
+<pre><code>
+import tkinter as tk
+
+window = tk.Tk()
+
+entry = tk.Entry(window)
+entry.pack()
+
+window.mainloop()
+</code></pre>
+
+<h2>8. Entry және Button бірге қолдану</h2>
+
+<pre><code>
+import tkinter as tk
+
+def show_name():
+    name = entry.get()
+    label.config(text="Сәлем, " + name)
+
+window = tk.Tk()
+
+entry = tk.Entry(window)
+entry.pack()
+
+button = tk.Button(window,
+                   text="Жіберу",
+                   command=show_name)
+button.pack()
+
+label = tk.Label(window, text="")
+label.pack()
+
+window.mainloop()
+</code></pre>
+
+<p>Бұл бағдарлама пайдаланушының атын енгізіп, экранға шығарады.</p>
+
+<h2>9. Pack() әдісі</h2>
+
+<p>Элементтерді терезеге орналастырады.</p>
+
+<pre><code>
+label.pack()
+button.pack()
+entry.pack()
+</code></pre>
+
+<p>Pack() ең қарапайым орналастыру тәсілі болып табылады.</p>
+
+<h2>10. Tkinter қолдану салалары</h2>
+
+<ul>
+<li>Калькулятор жасау</li>
+<li>Тіркеу жүйесі</li>
+<li>Тест бағдарламасы</li>
+<li>Ойындар</li>
+<li>Банк жүйесі</li>
+<li>Дүкен бағдарламасы</li>
+<li>Чат бағдарламалары</li>
+</ul>
+
+<p>сияқты көптеген жобалар жасауға болады.</p>
+
+<h2>Қорытынды</h2>
+
+<p>
+Tkinter — Python тіліндегі ең қарапайым GUI кітапханасы.
+Ол арқылы қолданушыға ыңғайлы бағдарламалар жасауға болады.
+</p>
+
+<p>Tkinter-де ең маңызды элементтер:</p>
+
+<ul>
+<li>Tk()</li>
+<li>Label</li>
+<li>Button</li>
+<li>Entry</li>
+<li>pack()</li>
+<li>mainloop()</li>
+</ul>
+
+<p>
+Осы элементтерді меңгергеннен кейін күрделі интерфейстер құруға болады.
+</p>
+
+<hr>
+
+<h1>Ауызша сұрақтар</h1>
+
+<h3>1-сұрақ</h3>
+<p>Tkinter кітапханасының негізгі мақсаты қандай?</p>
+
+
+<h3>2-сұрақ</h3>
+<p>mainloop() не үшін қажет?</p>
+
+
+
+<h3>3-сұрақ</h3>
+<p>Entry және Label элементтерінің айырмашылығы қандай?</p>
+
+
+
+<hr>
+
+<h1>Практикалық тапсырмалар</h1>
+
+<h2>1-тапсырма (Оңай)</h2>
+
+<h3>"Сәлемдесу бағдарламасы"</h3>
+
+<ul>
+<li>Entry</li>
+<li>Button</li>
+<li>Label</li>
+</ul>
+
+<p>Пайдаланушы атын енгізеді.</p>
+
+<p>Батырманы басқанда:</p>
+
+<pre><code>
+Сәлем, Аружан!
+</code></pre>
+
+<p>сияқты хабарлама шығуы керек.</p>
+
+<h2>2-тапсырма (Орташа)</h2>
+
+<h3>"Екі санның қосындысы"</h3>
+
+<p>Терезеде:</p>
+
+<ul>
+<li>2 Entry</li>
+<li>1 Button</li>
+<li>1 Label</li>
+</ul>
+
+<p>болсын.</p>
+
+<p>Пайдаланушы екі сан енгізеді.</p>
+
+<p>Батырманы басқанда:</p>
+
+<pre><code>
+Нәтиже: 35
+</code></pre>
+
+<p>шығуы керек.</p>
+
+<h2>3-тапсырма (Қызықты және күрделірек)</h2>
+
+<h3>🎲 "Санды тап" ойыны</h3>
+
+<ul>
+<li>1 мен 100 аралығында кездейсоқ сан таңдайды;</li>
+<li>Пайдаланушы сан енгізеді;</li>
+<li>Батырманы басады;</li>
+<li>Үлкен болса — "Кішірек сан енгіз!"</li>
+<li>Кіші болса — "Үлкенірек сан енгіз!"</li>
+<li>Дұрыс тапса — "Құттықтаймыз! Сіз таптыңыз!"</li>
+</ul>
+
+<p>Қосымша күрделендіру:</p>
+
+<ul>
+<li>Қанша әрекет жасағанын есептеу;</li>
+<li>Қайта бастау батырмасын қосу.</li>
+</ul>
+
+<p>
+Бұл тапсырма оқушыларға өте қызық болады, себебі онда GUI,
+кездейсоқ сандар және ойын логикасы бірге қолданылады.
+</p>
+
+</body>
+</html>
