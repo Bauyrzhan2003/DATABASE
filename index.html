@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IS TECH QUIZ — Компьютер және желі / Компьютер и сеть</title>
+<style>
+:root{
+  --bg:#070b14; --card:#101725; --card2:#151e2f; --line:#25324a;
+  --text:#f4f7fb; --muted:#93a0b8; --accent:#5b8cff; --accent2:#7c4dff;
+  --good:#21c77a; --bad:#ff4d67; --gold:#ffca55;
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 15% 10%,#18254b 0,#070b14 38%),var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh}
+button{font:inherit}
+.container{width:min(1050px,92%);margin:auto}
+header{padding:28px 0 10px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+.logo{font-weight:900;letter-spacing:1px;font-size:22px}.logo span{color:#6e94ff}
+.badge{border:1px solid var(--line);padding:9px 13px;border-radius:999px;color:var(--muted);font-size:13px}
+.hero{padding:45px 0 30px;text-align:center}
+.hero h1{font-size:clamp(36px,7vw,72px);line-height:.98;margin:0 0 18px;letter-spacing:-3px}
+.hero h1 span{background:linear-gradient(90deg,#6e94ff,#a970ff);-webkit-background-clip:text;color:transparent}
+.hero p{color:var(--muted);font-size:17px;max-width:680px;margin:auto;line-height:1.6}
+.btn-group{display:flex;justify-content:center;gap:15px;margin-top:30px;flex-wrap:wrap}
+.start,.lang-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));border:0;color:white;padding:15px 28px;border-radius:14px;font-weight:800;cursor:pointer;box-shadow:0 12px 35px #456dff35;transition:.2s}
+.lang-btn:hover,.start:hover{transform:scale(1.03)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 35px}
+.stat{background:#0d1421aa;border:1px solid var(--line);border-radius:18px;padding:18px;text-align:center}.stat b{font-size:24px}.stat small{display:block;color:var(--muted);margin-top:5px}
+.hidden{display:none!important}
+.quiz-card{background:linear-gradient(145deg,#111a29,#0c121d);border:1px solid var(--line);border-radius:26px;padding:25px;box-shadow:0 25px 80px #0007}
+.topline{display:flex;justify-content:space-between;color:var(--muted);font-size:14px;margin-bottom:14px}
+.progress{height:8px;background:#202a3b;border-radius:99px;overflow:hidden;margin-bottom:25px}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:.3s}
+.question{font-size:24px;line-height:1.3;margin:0 0 20px}
+.imagebox{height:300px;background:#080d16;border:1px solid var(--line);border-radius:20px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:20px}
+.imagebox svg{width:90%;height:90%;max-width:520px}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.option{background:var(--card2);border:1px solid var(--line);color:var(--text);padding:17px;border-radius:14px;text-align:left;cursor:pointer;transition:.2s}
+.option:hover{border-color:#668bff;transform:translateY(-1px)}.option.correct{background:#123b2a;border-color:var(--good)}.option.wrong{background:#3b1420;border-color:var(--bad)}
+.option:disabled{cursor:default}
+.next{display:block;width:100%;margin-top:18px;padding:15px;border:0;border-radius:14px;background:#e9eef9;color:#0b1020;font-weight:900;cursor:pointer}
+.feedback{min-height:25px;text-align:center;margin-top:12px;font-weight:700}.good{color:var(--good)}.bad{color:var(--bad)}
+.result{text-align:center;padding:45px 20px}.score{font-size:75px;font-weight:900;background:linear-gradient(90deg,#6e94ff,#b26cff);-webkit-background-clip:text;color:transparent}
+.result h2{font-size:34px;margin:0 0 10px}.result p{color:var(--muted)}
+.restart{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:0;padding:14px 24px;border-radius:14px;font-weight:800;cursor:pointer;margin-top:18px}
+.lang-modal{text-align:center;padding:30px 15px}
+footer{color:#65718a;text-align:center;padding:35px 0;font-size:13px}
+@media(max-width:700px){.stats,.options{grid-template-columns:1fr}.question{font-size:20px}.imagebox{height:230px}.hero h1{letter-spacing:-1px}}
+</style>
+</head>
+<body>
+<div class="container">
+<header><div class="logo">IS <span>TECH QUIZ</span></div><div class="badge">Компьютер • Hardware • Network</div></header>
+
+<section id="home">
+  <div class="hero">
+    <h1>IT білімін <span>тексер.</span></h1>
+    <p>Компьютер жинау, PC компоненттері және желілер бойынша интерактивті тест. Суретке қарап құрылғыны анықта, техникалық сұрақтарға жауап бер.</p>
+    <div class="btn-group">
+      <button class="start" onclick="showLangSelect()">ТЕСТІ БАСТАУ / НАЧАТЬ ТЕСТ →</button>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat"><b>20</b><small id="st1">сұрақ / вопросов</small></div>
+    <div class="stat"><b>10</b><small id="st2">суретті тапсырма / с фото</small></div>
+    <div class="stat"><b>100</b><small id="st3">максимум ұпай / баллов</small></div>
+  </div>
+</section>
+
+<!-- Тілді таңдау бөлімі -->
+<section id="langSelect" class="hidden">
+  <div class="quiz-card lang-modal">
+    <h2>Тілді таңдаңыз / Выберите язык</h2>
+    <p style="color:var(--muted); margin-bottom:25px;">Тест қай тілде жүргізілсін?</p>
+    <div class="btn-group">
+      <button class="lang-btn" onclick="setLanguage('kk')">Қазақ тілі 🇰🇿</button>
+      <button class="lang-btn" onclick="setLanguage('ru')">Русский язык 🇷🇺</button>
+    </div>
+  </div>
+</section>
+
+<section id="quiz" class="hidden">
+ <div class="quiz-card">
+  <div class="topline"><span id="counter">1 / 20</span><span><span id="scoreLabel">Ұпай</span>: <b id="score">0</b></span></div>
+  <div class="progress"><i id="bar"></i></div>
+  <div id="questionArea"></div>
+  <div id="feedback" class="feedback"></div>
+  <button id="next" class="next hidden" onclick="nextQuestion()">Келесі сұрақ →</button>
+ </div>
+</section>
+
+<section id="result" class="hidden">
+ <div class="quiz-card result">
+  <div class="score" id="finalScore">0%</div>
+  <h2 id="resultTitle"></h2>
+  <p id="resultText"></p>
+  <button class="restart" id="restartBtn" onclick="restartQuiz()">ҚАЙТА ӨТУ</button>
+ </div>
+</section>
+
+<footer>IS TECH QUIZ • IT мамандықтарына арналған оқу тесті</footer>
+</div>
+
+<script>
+let currentLang = 'kk';
+
+const uiText = {
+  kk: {
+    scoreLabel: "Ұпай",
+    nextBtn: "Келесі сұрақ →",
+    correctMsg: "✓ Дұрыс жауап! +5 ұпай",
+    wrongMsg: "✕ Қате. Дұрыс жауап: ",
+    restartBtn: "ҚАЙТА ӨТУ",
+    levels: [
+      { min: 90, title: "PRO деңгей 🔥", text: "Hardware және Network бойынша деңгейің өте жақсы." },
+      { min: 70, title: "Жақсы нәтиже 💻", text: "Негізгі тақырыптарды жақсы меңгергенсің. Практикамен бекіт." },
+      { min: 50, title: "Орта деңгей ⚙️", text: "Базаны білесің, бірақ кейбір компоненттерді қайталау керек." },
+      { min: 0,  title: "Бастапқы деңгей 🧩", text: "Компоненттер мен желілерді қайталап, тестті қайта өтіп көр." }
+    ]
+  },
+  ru: {
+    scoreLabel: "Баллы",
+    nextBtn: "Следующий вопрос →",
+    correctMsg: "✓ Правильно! +5 баллов",
+    wrongMsg: "✕ Неправильно. Правильный ответ: ",
+    restartBtn: "ПРОЙТИ ЗАНОВО",
+    levels: [
+      { min: 90, title: "Уровень PRO 🔥", text: "Превосходные знания в Hardware и Сетях." },
+      { min: 70, title: "Хороший результат 💻", text: "Отлично знаешь базовые темы. Закрепи практикой." },
+      { min: 50, title: "Средний уровень ⚙️", text: "Знаешь базу, но нужно повторить некоторые компоненты." },
+      { min: 0,  title: "Начальный уровень 🧩", text: "Повтори основы железа и сетей, затем попробуй снова." }
+    ]
+  }
+};
+
+const svg = {
+gpu:`<svg viewBox="0 0 600 320"><rect x="50" y="40" width="500" height="240" rx="16" fill="#1e293b" stroke="#475569" stroke-width="4"/><rect x="70" y="60" width="440" height="200" rx="12" fill="#0f172a"/><circle cx="180" cy="160" r="65" fill="#1e293b" stroke="#3b82f6" stroke-width="4"/><circle cx="180" cy="160" r="20" fill="#0f172a"/><g stroke="#64748b" stroke-width="4"><path d="M180 95v130M115 160h130M134 114l92 92M134 206l92-92"/></g><circle cx="400" cy="160" r="65" fill="#1e293b" stroke="#3b82f6" stroke-width="4"/><circle cx="400" cy="160" r="20" fill="#0f172a"/><g stroke="#64748b" stroke-width="4"><path d="M400 95v130M335 160h130M354 114l92 92M354 206l92-92"/></g><rect x="510" y="70" width="25" height="180" fill="#94a3b8"/><rect x="80" y="260" width="300" height="15" fill="#eab308"/></svg>`,
+ram:`<svg viewBox="0 0 600 320"><rect x="40" y="90" width="520" height="140" rx="8" fill="#15803d" stroke="#22c55e" stroke-width="3"/><rect x="60" y="110" width="80" height="70" rx="4" fill="#1e293b"/><rect x="160" y="110" width="80" height="70" rx="4" fill="#1e293b"/><rect x="260" y="110" width="80" height="70" rx="4" fill="#1e293b"/><rect x="360" y="110" width="80" height="70" rx="4" fill="#1e293b"/><rect x="460" y="110" width="80" height="70" rx="4" fill="#1e293b"/><path d="M50 230h220M290 230h260" stroke="#eab308" stroke-width="12" stroke-dasharray="8 4"/><rect x="270" y="225" width="20" height="15" fill="#15803d"/></svg>`,
+ssd:`<svg viewBox="0 0 600 320"><rect x="60" y="125" width="480" height="70" rx="10" fill="#0f172a" stroke="#475569" stroke-width="3"/><rect x="80" y="135" width="30" height="50" rx="4" fill="#eab308"/><rect x="130" y="135" width="90" height="50" rx="4" fill="#334155"/><rect x="240" y="135" width="120" height="50" rx="4" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/><text x="300" y="165" fill="#60a5fa" font-size="16" font-weight="bold" text-anchor="middle">NVMe M.2</text><rect x="380" y="135" width="130" height="50" rx="4" fill="#334155"/><circle cx="520" cy="160" r="8" fill="#475569"/></svg>`,
+board:`<svg viewBox="0 0 600 320"><rect x="80" y="30" width="440" height="260" rx="12" fill="#064e3b" stroke="#10b981" stroke-width="4"/><rect x="130" y="70" width="110" height="110" fill="#334155" stroke="#94a3b8" stroke-width="3"/><text x="185" y="130" fill="#94a3b8" font-size="16" font-weight="bold" text-anchor="middle">SOCKET</text><rect x="280" y="60" width="20" height="130" fill="#1e293b"/><rect x="310" y="60" width="20" height="130" fill="#1e293b"/><rect x="340" y="60" width="20" height="130" fill="#1e293b"/><rect x="130" y="210" width="220" height="25" fill="#1e293b" stroke="#eab308" stroke-width="2"/><circle cx="430" cy="100" r="30" fill="#64748b"/><circle cx="430" cy="180" r="22" fill="#64748b"/></svg>`,
+psu:`<svg viewBox="0 0 600 320"><rect x="100" y="50" width="400" height="220" rx="14" fill="#1e293b" stroke="#64748b" stroke-width="4"/><circle cx="280" cy="160" r="75" fill="#0f172a" stroke="#475569" stroke-width="4"/><path d="M280 85v150M205 160h150" stroke="#475569" stroke-width="6"/><circle cx="280" cy="160" r="18" fill="#64748b"/><rect x="440" y="80" width="40" height="60" fill="#0f172a" stroke="#94a3b8" stroke-width="2"/><rect x="445" y="170" width="30" height="20" fill="#ef4444"/></svg>`,
+router:`<svg viewBox="0 0 600 320"><rect x="80" y="160" width="440" height="90" rx="20" fill="#1e293b" stroke="#38bdf8" stroke-width="3"/><rect x="140" y="40" width="16" height="120" rx="8" fill="#38bdf8"/><rect x="300" y="30" width="16" height="130" rx="8" fill="#38bdf8"/><rect x="440" y="40" width="16" height="120" rx="8" fill="#38bdf8"/><circle cx="140" cy="205" r="6" fill="#4ade80"/><circle cx="180" cy="205" r="6" fill="#4ade80"/><circle cx="220" cy="205" r="6" fill="#4ade80"/><circle cx="260" cy="205" r="6" fill="#4ade80"/></svg>`,
+switch:`<svg viewBox="0 0 600 320"><rect x="50" y="100" width="500" height="120" rx="10" fill="#0f172a" stroke="#64748b" stroke-width="4"/><g fill="#1e293b" stroke="#94a3b8" stroke-width="2"><rect x="80" y="130" width="40" height="30"/><rect x="135" y="130" width="40" height="30"/><rect x="190" y="130" width="40" height="30"/><rect x="245" y="130" width="40" height="30"/><rect x="300" y="130" width="40" height="30"/><rect x="355" y="130" width="40" height="30"/><rect x="410" y="130" width="40" height="30"/><rect x="465" y="130" width="40" height="30"/></g><circle cx="100" cy="175" r="4" fill="#4ade80"/><circle cx="155" cy="175" r="4" fill="#4ade80"/><circle cx="210" cy="175" r="4" fill="#4ade80"/><circle cx="265" cy="175" r="4" fill="#4ade80"/></svg>`,
+ethernet:`<svg viewBox="0 0 600 320"><path d="M200 80h200v90h-30v70h-140v-70h-30z" fill="#cbd5e1" stroke="#94a3b8" stroke-width="4"/><rect x="220" y="80" width="160" height="30" fill="#eab308"/><rect x="240" y="180" width="120" height="40" fill="#1e293b"/><path d="M220 240h160v40H220z" fill="#3b82f6"/></svg>`,
+cpu:`<svg viewBox="0 0 600 320"><rect x="160" y="40" width="280" height="240" rx="16" fill="#cbd5e1" stroke="#64748b" stroke-width="5"/><rect x="210" y="80" width="180" height="160" rx="8" fill="#94a3b8" stroke="#475569" stroke-width="3"/><text x="300" y="150" fill="#1e293b" font-size="22" font-weight="900" text-anchor="middle">CPU</text><text x="300" y="180" fill="#475569" font-size="14" font-weight="bold" text-anchor="middle">PROCESSOR</text></svg>`
+};
+
+const questionsData = {
+  kk: [
+    {img:"gpu",q:"Суреттегі құрылғы қалай аталады?",a:["Видеокарта","Процессор","SSD","Оперативті жад"],c:0},
+    {img:"cpu",q:"Суреттегі құрылғы қалай аталады?",a:["Видеокарта","Процессор","Блок питания","HDD"],c:1},
+    {img:"ram",q:"Суреттегі құрылғы қалай аталады?",a:["SSD","Видеокарта","Оперативті жад (RAM)","Материнская плата"],c:2},
+    {img:"ssd",q:"Суреттегі құрылғы қалай аталады?",a:["RAM","Блок питания","Процессор","NVMe SSD"],c:3},
+    {img:"board",q:"Суреттегі құрылғы қалай аталады?",a:["Материнская плата","Видеокарта","Switch","SSD"],c:0},
+    {img:"psu",q:"Суреттегі құрылғы қалай аталады?",a:["Процессор","Блок питания (PSU)","Router","RAM"],c:1},
+    {img:"router",q:"Суреттегі құрылғы қалай аталады?",a:["Switch","Модем кабелі","Wi‑Fi Router","Видеокарта"],c:2},
+    {img:"switch",q:"Суреттегі құрылғы қалай аталады?",a:["Router","SSD","PSU","Switch (Коммутатор)"],c:3},
+    {img:"ethernet",q:"Суреттегі коннектор қалай аталады?",a:["RJ-45","USB-C","HDMI","DisplayPort"],c:0},
+    {img:"gpu",q:"Суреттегі видеокарта компьютерде қандай міндет атқарады?",a:["Интернетті таратады","Графикалық есептеулер мен бейне шығаруды өңдейді","Файлдарды ұзақ сақтайды","Компьютерге электр береді"],c:1},
+
+    {q:"Компьютер қосылады, бірақ мониторда сурет жоқ (экран қара). Бірінші нені тексерген дұрыс?",a:["Пернетақта тілін","Принтер кабелін","RAM (жедел жад) плашкаларының орнында дұрыс тұрғанын","Динамиктің дыбысын"],c:2},
+    {q:"Жаңа видеокарта орнатқан соң, ойын ойнағанда компьютер өшіп қала береді. Ең ықтимал себеп қандай?",a:["Интернет жылдамдығы төмен","Монитордың экраны кішкентай","Тышқанның DPI төмен","Блок питанияның (PSU) қуаты жетпейді"],c:3},
+    {q:"Компьютерге Wi-Fi арқылы интернет кіріп тұр, ал кабель арқылы кірмей қалды. Қай құрылғыны тексереміз?",a:["Ethernet кабелі мен Свитч/Роутер портын","Жады модульдерін (RAM)","Процессордың салқындатқышын","Блок питанияның тоғын"],c:0},
+    {q:"Компьютер өте баяу қосылады (Windows 3-5 минут жүктеледі). Жүйені жылдамдатудың ең тиімді жолы қайсы?",a:["Жаңа монитор сатып алу","Операциялық жүйені ескі HDD-ден SSD-ге ауыстыру","Тінтуірді ауыстыру","Желілік кабельді суыру"],c:1},
+    {q:"Үйдегі басқа телефондар мен ноутбуктерде Wi-Fi жұмыс істеп тұр, ал компьютерде интернет жоқ. Себебі неде?",a:["Процессордың (CPU) қызып кетуінде","Видеокартаның драйверінде","Компьютердегі сетевая карта немесе IP-адрес баптауларында","Экранның жарықтығында"],c:2},
+
+    {q:"Процессордың (CPU) негізгі міндеті қандай?",a:["Барлық есептеулер мен командаларды орындайтын «компьютер миы»","Графиканы өңдеу","Сымсыз интернет тарату","Электр тоғын реттеу"],c:0},
+    {q:"RAM (Жедел жад) дискіден (HDD/SSD) несімен ерекшеленеді?",a:["Мәліметтерді компьютер өшкенше уақытша сақтайтын өте жылдам жад","Мәліметтер мәңгілік сақталады","Ол тек файлдарды жоюға арналған","Интернет жылдамдығын арттырады"],c:0},
+    {q:"LAN (Local Area Network) дегеніміз не?",a:["Ғаламдық интернет","Жергілікті (бір ғимарат немесе бөлме ішіндегі) желі","Операциялық жүйе","Монитор ажыратымдылығы"],c:1},
+    {q:"Желідегі IP-адрес не үшін қажет?",a:["Процессордың температурасын тексеру үшін","Дискінің көлемін білу үшін","Желідегі әр құрылғыны қайталанбас мекенжаймен анықтау үшін","Видеокартаның жылдамдығын арттыру үшін"],c:2},
+    {q:"Switch (Коммутатор) құрылғысы не үшін қолданылады?",a:["Файлдарды дискіден өшіру үшін","Графикалық ойындарды іске қосу үшін","Компьютерге электр беретін батарея ретінде","Бір жергілікті желідегі бірнеше құрылғыны бір-бірімен байланыстыру үшін"],c:3}
+  ],
+  ru: [
+    {img:"gpu",q:"Как называется устройство на изображении?",a:["Видеокарта","Процессор","SSD","Оперативная память"],c:0},
+    {img:"cpu",q:"Как называется устройство на изображении?",a:["Видеокарта","Процессор","Блок питания","HDD"],c:1},
+    {img:"ram",q:"Как называется устройство на изображении?",a:["SSD","Видеокарта","Оперативная память (RAM)","Материнская плата"],c:2},
+    {img:"ssd",q:"Как называется устройство на изображении?",a:["RAM","Блок питания","Процессор","NVMe SSD"],c:3},
+    {img:"board",q:"Как называется устройство на изображении?",a:["Материнская плата","Видеокарта","Switch","SSD"],c:0},
+    {img:"psu",q:"Как называется устройство на изображении?",a:["Процессор","Блок питания (PSU)","Router","RAM"],c:1},
+    {img:"router",q:"Как называется устройство на изображении?",a:["Switch","Модемный кабель","Wi‑Fi Router","Видеокарта"],c:2},
+    {img:"switch",q:"Как называется устройство на изображении?",a:["Router","SSD","PSU","Switch (Коммутатор)"],c:3},
+    {img:"ethernet",q:"Как называется коннектор на изображении?",a:["RJ-45","USB-C","HDMI","DisplayPort"],c:0},
+    {img:"gpu",q:"Какую роль выполняет видеокарта в компьютере?",a:["Раздает интернет","Обрабатывает графику и выводит изображение","Долго хранит файлы","Подает питание на ПК"],c:1},
+
+    {q:"Компьютер включается, но на мониторе нет изображения (черный экран). Что проверить в первую очередь?",a:["Язык клавиатуры","Кабель принтера","Надежность установки модулей RAM в слотах","Звук динамиков"],c:2},
+    {q:"После установки новой видеокарты ПК выключается во время игр. Какова наиболее вероятная причина?",a:["Низкая скорость интернета","Маленький экран монитора","Низкое DPI мыши","Недостаточная мощность блока питания (PSU)"],c:3},
+    {q:"На компьютере работает Wi-Fi, но пропал интернет по кабелю. Какое устройство проверить?",a:["Кабель Ethernet и порт Switch/Router","Модули памяти (RAM)","Кулер процессора","Питание блока питания"],c:0},
+    {q:"Компьютер загружается очень медленно (Windows грузится 3-5 минут). Как эффективнее всего ускорить систему?",a:["Купить новый монитор","Перенести операционную систему со старого HDD на SSD","Заменить мышь","Отключить сетевой кабель"],c:1},
+    {q:"На смартфонах и ноутбуках Wi-Fi работает, а на ПК интернета нет. В чем причина?",a:["Перегрев процессора (CPU)","Драйвер видеокарты","Настройки сетевой карты или IP-адреса на ПК","Яркость экрана"],c:2},
+
+    {q:"Какова основная функция процессора (CPU)?",a:["«Мозг ПК», выполняющий все вычисления и инструкции","Обработка графики","Раздача беспроводного интернета","Регулировка электропитания"],c:0},
+    {q:"Чем оперативная память (RAM) отличается от накопителя (HDD/SSD)?",a:["Это быстрая память для временного хранения данных до выключения ПК","Данные хранятся вечно","Предназначена только для удаления файлов","Увеличивает скорость интернета"],c:0},
+    {q:"Что означает аббревиатура LAN (Local Area Network)?",a:["Глобальный интернет","Локальная сеть (в пределах одного здания или комнаты)","Операционная система","Разрешение монитора"],c:1},
+    {q:"Для чего нужен IP-адрес в сети?",a:["Для измерения температуры процессора","Для проверки объема диска","Для уникальной адресации каждого устройства в сети","Для ускорения видеокарты"],c:2},
+    {q:"Каково основное назначение коммутатора (Switch)?",a:["Для удаления файлов с диска","Для запуска графических игр","Как батарея питания для ПК","Для соединения нескольких устройств в одну локальную сеть"],c:3}
+  ]
+};
+
+let idx=0, score=0, answered=false;
+
+function showLangSelect(){
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("langSelect").classList.remove("hidden");
+}
+
+function setLanguage(lang){
+  currentLang = lang;
+  document.getElementById("langSelect").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  
+  document.getElementById("scoreLabel").textContent = uiText[currentLang].scoreLabel;
+  document.getElementById("next").textContent = uiText[currentLang].nextBtn;
+  document.getElementById("restartBtn").textContent = uiText[currentLang].restartBtn;
+  
+  startQuiz();
+}
+
+function startQuiz(){
+  idx=0; score=0; answered=false;
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  render();
+}
+
+function render(){
+ answered=false;
+ const questions = questionsData[currentLang];
+ const q = questions[idx];
+ document.getElementById("counter").textContent=`${idx+1} / ${questions.length}`;
+ document.getElementById("score").textContent=score;
+ document.getElementById("bar").style.width=((idx)/questions.length*100)+"%";
+ document.getElementById("feedback").textContent="";
+ document.getElementById("feedback").className="feedback";
+ document.getElementById("next").classList.add("hidden");
+ let html="";
+ if(q.img) html+=`<div class="imagebox">${svg[q.img]}</div>`;
+ html+=`<h2 class="question">${q.q}</h2><div class="options">`;
+ q.a.forEach((x,i)=>html+=`<button class="option" onclick="answer(${i})">${String.fromCharCode(65+i)}) ${x}</button>`);
+ html+="</div>";
+ document.getElementById("questionArea").innerHTML=html;
+}
+
+function answer(n){
+ if(answered)return; answered=true;
+ const questions = questionsData[currentLang];
+ const q=questions[idx], opts=[...document.querySelectorAll(".option")];
+ opts.forEach(b=>b.disabled=true);
+ opts[q.c].classList.add("correct");
+ if(n===q.c){
+   score+=5;
+   document.getElementById("feedback").textContent = uiText[currentLang].correctMsg;
+   document.getElementById("feedback").className = "feedback good";
+ } else {
+   opts[n].classList.add("wrong");
+   document.getElementById("feedback").textContent = uiText[currentLang].wrongMsg + q.a[q.c];
+   document.getElementById("feedback").className = "feedback bad";
+ }
+ document.getElementById("score").textContent=score;
+ document.getElementById("next").classList.remove("hidden");
+}
+
+function nextQuestion(){
+ const questions = questionsData[currentLang];
+ idx++;
+ if(idx>=questions.length){finish();return}
+ render();
+}
+
+function finish(){
+ const questions = questionsData[currentLang];
+ document.getElementById("quiz").classList.add("hidden");
+ document.getElementById("result").classList.remove("hidden");
+ const pct=Math.round(score/(questions.length*5)*100);
+ document.getElementById("finalScore").textContent=pct+"%";
+ 
+ const lvl = uiText[currentLang].levels.find(l => pct >= l.min);
+ document.getElementById("resultTitle").textContent = lvl.title;
+ document.getElementById("resultText").textContent = `${score} / ${questions.length*5} ${uiText[currentLang].scoreLabel.toLowerCase()}. ${lvl.text}`;
+}
+
+function restartQuiz(){
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("home").classList.remove("hidden");
+}
+</script>
+</body>
+</html>
